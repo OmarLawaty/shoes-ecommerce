@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
 import type { CartItem } from './types';
+import { persist } from 'zustand/middleware';
 
 interface CartStore {
   cart: CartItem[];
@@ -10,25 +11,33 @@ interface CartStore {
   clearCart: () => void;
 }
 
-export const useCartStore = create<CartStore>((set) => {
-  return {
-    cart: [],
-    count: 0,
-    addItem: (productId, quantity = 1) =>
-      set(({ cart }) => {
-        const newCart = cart
-          .filter((cartItem) => cartItem.id !== productId)
-          .concat({ ...mockCartItem, id: productId, quantity });
+export const useCartStore = create<CartStore>()(
+  persist(
+    (set, get) => ({
+      cart: [],
+      count: 0,
+      addItem: (productId, quantity = 1) =>
+        set(() => {
+          const newCart = get()
+            .cart.filter((cartItem) => cartItem.id !== productId)
+            .concat({ ...mockCartItem, id: productId, quantity });
 
-        return {
-          cart: newCart,
-          count: getCount(newCart),
-        };
-      }),
-    removeItem: (productId) => set(({ cart }) => ({ cart: cart.filter((cartItem) => cartItem.id !== productId) })),
-    clearCart: () => set({ cart: [] }),
-  };
-});
+          return {
+            cart: newCart,
+            count: getCount(newCart),
+          };
+        }),
+      removeItem: (productId) =>
+        set(() => {
+          const newCart = get().cart.filter((cartItem) => cartItem.id !== productId);
+
+          return { cart: newCart, count: getCount(newCart) };
+        }),
+      clearCart: () => set({ cart: [] }),
+    }),
+    { name: 'cart' }
+  )
+);
 
 const getCount = (cart: CartItem[]) => cart.reduce((acc, cartItem) => cartItem.quantity + acc, 0);
 
