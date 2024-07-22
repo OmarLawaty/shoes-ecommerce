@@ -8,6 +8,7 @@ type ProductData =
       product: undefined;
       isLoading: true;
       isError: false;
+      error: undefined;
       isSuccess: false;
     }
   | {
@@ -15,11 +16,13 @@ type ProductData =
       isError: true;
       isSuccess: false;
       product: undefined;
+      error: Error;
     }
   | {
       isLoading: false;
       isError: false;
       isSuccess: true;
+      error: undefined;
       product: Product;
     };
 
@@ -31,24 +34,28 @@ export const useProduct = () => {
     isLoading: true,
     isError: false,
     isSuccess: false,
+    error: undefined,
   }));
 
   useEffect(() => {
     if (!id) return;
 
     (async () => {
-      try {
-        await getProductById(id)
-          .then((res) => setProduct(res?.data))
-          .catch(() => setProductData({ isError: true, isLoading: false, isSuccess: false, product: undefined }));
-      } finally {
-        // eslint-disable-next-line no-unsafe-finally
-        if (!product) return;
-
-        setProductData({ isLoading: false, isSuccess: true, isError: false, product });
-      }
+      await getProductById(id)
+        .then((res) => {
+          setProduct(res?.data);
+        })
+        .catch((err) =>
+          setProductData({ isLoading: false, isSuccess: false, isError: true, product: undefined, error: err })
+        );
     })();
-  }, [id, product]);
+  }, [id]);
+
+  useEffect(() => {
+    if (!product) return;
+
+    setProductData({ isLoading: false, isSuccess: true, isError: false, product: product, error: undefined });
+  }, [product]);
 
   return productData;
 };
