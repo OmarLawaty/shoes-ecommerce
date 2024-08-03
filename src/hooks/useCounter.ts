@@ -1,24 +1,20 @@
 import { useState } from 'react';
 
-export const useCounter = (initialValue: number, maxValue?: number) => {
+export const useCounter = (initialValue: number, maxValue?: number, loop: boolean = false) => {
   const [count, setCount] = useState(initialValue);
 
   return {
     count,
     setCount: (value: number) => setCount(value),
     increment: () => {
-      if (maxValue) {
-        count === maxValue ? setCount(0) : setCount(count + 1);
-      } else {
-        setCount(count + 1);
-      }
+      if (!maxValue || maxValue !== count) return setCount(count + 1);
+
+      if (loop) setCount(0);
     },
     decrement: () => {
-      if (maxValue) {
-        count === 0 ? setCount(maxValue) : setCount(count - 1);
-      } else {
-        return;
-      }
+      if (count > 0) return setCount(count - 1);
+
+      if (loop && maxValue) setCount(maxValue);
     },
   };
 };

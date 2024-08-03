@@ -23,7 +23,7 @@ export const ImagePreview = ({
   type,
   ...props
 }: ImagePreviewProps) => {
-  const imageIndex = useCounter(initialImageIndex || 0, images.length - 1);
+  const imageIndex = useCounter(initialImageIndex || 0, images.length - 1, true);
 
   if (setCurrentImageIndex) setCurrentImageIndex(imageIndex.count);
 
