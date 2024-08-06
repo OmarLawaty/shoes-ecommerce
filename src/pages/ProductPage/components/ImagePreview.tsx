@@ -38,10 +38,11 @@ export const ImagePreview = ({
           top="50%"
           transform="translate(-50%,-50%)"
           bgColor="#80808087"
+          zIndex={10}
           onClick={() => {
             if (closeLightBox) closeLightBox();
           }}
-        ></Box>
+        />
       )}
 
       <Flex
@@ -50,6 +51,7 @@ export const ImagePreview = ({
         position={type === 'lightbox' ? 'absolute' : 'unset'}
         left="50%"
         top="50%"
+        zIndex={11}
         transform={type === 'lightbox' ? 'translate(-50%,-50%)' : 'unset'}
       >
         {type === 'lightbox' && (
@@ -73,8 +75,8 @@ export const ImagePreview = ({
           <Box
             minW={['unset', null, '350px']}
             minH={['350px', null, '350px']}
-            w={['100vw', null, '35vw']}
-            h={['70vw', null, '35vw']}
+            w={['97vw', null, '30vw']}
+            h={['70vw', null, '30vw']}
             borderRadius="1em"
             bgColor={images[imageIndex.count]}
             cursor={['unset', null, 'pointer']}

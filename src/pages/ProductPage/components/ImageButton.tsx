@@ -14,7 +14,7 @@ export const ImageButton = ({ image, ...props }: ImageButtonProps) => {
       minW="60px"
       margin="20px 1.5vw"
       borderRadius="10px"
-      boxSize="6.5vw"
+      boxSize="5.3vw"
       pos="relative"
     ></Box>
   );
