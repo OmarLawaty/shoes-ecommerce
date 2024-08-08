@@ -12,7 +12,7 @@ interface ProductInfoProps {
 
 export const ProductInfo = ({ product }: ProductInfoProps) => {
   const productDescription = useLimitText(product.description, 300);
-  const productCount = useCounter(1, 30);
+  const productCount = useCounter({ maxCount: 30 });
 
   const cartStore = useCartStore();
 
