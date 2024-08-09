@@ -14,7 +14,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
   const productDescription = useLimitText(product.description, 300);
   const productCount = useCounter(1, 30);
 
-  const cartStore = useCartStore();
+  const addToCart = useCartStore((state) => state.addItem);
 
   return (
     <Flex direction="column" w="80%" h="50vh" minH="350px" gap="6">
@@ -100,7 +100,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
           isDisabled={productCount.count === 0 ? true : false}
           cursor={productCount.count === 0 ? 'not-allowed' : 'pointer'}
           _hover={productCount.count === 0 ? {} : { boxShadow: '0px 0px 20px 5px rgba(214,161,3,.5)' }}
-          onClick={() => cartStore.addItem(product.id, productCount.count)}
+          onClick={() => addToCart(product.id, productCount.count)}
         >
           Add to cart
         </Button>

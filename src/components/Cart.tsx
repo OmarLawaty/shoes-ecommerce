@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Flex, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { BsCart2 } from 'react-icons/bs';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 
@@ -7,11 +7,15 @@ import { useCartStore } from '../stores';
 
 export const Cart = () => {
   const cartPopUp = usePopUp();
-  const cartStore = useCartStore();
+
+  const cart = useCartStore((state) => state.cart);
+  const cartItemsCount = useCartStore((state) => state.count);
+  const clearCart = useCartStore((state) => state.clearCart);
+  const removeItem = useCartStore((state) => state.removeItem);
 
   return (
     <>
-      <Flex align="center" onClick={() => cartPopUp.onToggle()} fontSize="1.5rem" cursor="pointer">
+      <Flex align="center" onClick={cartPopUp.onToggle} fontSize="1.5rem" cursor="pointer">
         <BsCart2 />
 
         <Box
@@ -23,7 +27,7 @@ export const Cart = () => {
           borderRadius="20px"
           transform="translate(-50%,-50%)"
         >
-          {cartStore.cart.reduce((acc, current) => acc + current.quantity, 0)}
+          {cartItemsCount}
         </Box>
       </Flex>
 
@@ -44,12 +48,13 @@ export const Cart = () => {
       >
         <Flex justify="space-between" pb="2" borderBottom="1px solid blue">
           <Box>Cart</Box>
-          <Box onClick={() => cartStore.cart.forEach(({ id }) => cartStore.removeItem(id))} cursor="pointer">
+
+          <Box onClick={clearCart} cursor="pointer">
             Clear
           </Box>
         </Flex>
 
-        {cartStore.cart.map((cartItem) => {
+        {cart.map((cartItem) => {
           const displayedPrice =
             cartItem.price.discount !== 0 ? cartItem.price.value * (1 - cartItem.price.discount) : cartItem.price.value;
 
@@ -68,14 +73,14 @@ export const Cart = () => {
                 </Flex>
               </Flex>
 
-              <Box cursor="pointer" onClick={() => cartStore.removeItem(cartItem.id)}>
+              <Box cursor="pointer" onClick={() => removeItem(cartItem.id)}>
                 <RiDeleteBin6Line />
               </Box>
             </Flex>
           );
         })}
 
-        {cartStore.cart.length > 0 ? (
+        {cartItemsCount > 0 ? (
           <Button w="full" borderRadius="10px" h="12" bgColor="orange.500" textColor="#ffffff">
             Checkout
           </Button>
