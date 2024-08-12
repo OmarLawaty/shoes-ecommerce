@@ -7,7 +7,6 @@ interface ImageButtonProps extends FlexProps {
 export const ImageButton = ({ image, ...props }: ImageButtonProps) => {
   return (
     <Box
-      {...props}
       cursor="pointer"
       bgColor={image}
       minH="60px"
@@ -16,6 +15,7 @@ export const ImageButton = ({ image, ...props }: ImageButtonProps) => {
       borderRadius="10px"
       boxSize="5.3vw"
       pos="relative"
-    ></Box>
+      {...props}
+    />
   );
 };

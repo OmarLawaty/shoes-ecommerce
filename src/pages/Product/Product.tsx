@@ -4,7 +4,7 @@ import { Flex } from '@chakra-ui/react';
 import { ImagePreview, ProductInfo } from './components';
 import { useProduct } from '../../hooks';
 
-export const ProductPage = () => {
+export const Product = () => {
   const productData = useProduct();
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
