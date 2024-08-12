@@ -11,7 +11,7 @@ interface Product {
 interface ProductPrice {
   currency: string;
   value: number;
-  discount: number | null;
+  discount: number;
 }
 
 interface ProductImage {
