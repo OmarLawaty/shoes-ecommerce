@@ -39,7 +39,7 @@ export const Cart = () => {
         pos="absolute"
         right="0"
         top={cartPopUp.isOpen ? '100%' : '-1000%'}
-        zIndex="100"
+        zIndex="10"
         borderRadius="5px"
         boxShadow="5px 10px 30px -10px gray"
         minW="80"
@@ -49,9 +49,11 @@ export const Cart = () => {
         <Flex justify="space-between" pb="2" borderBottom="1px solid blue">
           <Box>Cart</Box>
 
-          <Box onClick={clearCart} cursor="pointer">
-            Clear
-          </Box>
+          {cartItemsCount !== 0 && (
+            <Box onClick={clearCart} cursor="pointer">
+              Clear
+            </Box>
+          )}
         </Flex>
 
         {cart.map((cartItem) => {
@@ -73,7 +75,7 @@ export const Cart = () => {
                 </Flex>
               </Flex>
 
-              <Box cursor="pointer" onClick={() => removeItem(cartItem.id)}>
+              <Box cursor="pointer" onClick={() => removeItem(cartItem.id)} _hover={{ color: 'black' }}>
                 <RiDeleteBin6Line />
               </Box>
             </Flex>

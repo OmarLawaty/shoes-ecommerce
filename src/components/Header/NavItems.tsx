@@ -39,7 +39,7 @@ const NavItem = ({ title, href }: NavItem) => (
       bottom: '0',
       transition: 'width 0.3s',
     }}
-    _hover={{ _after: { w: 'full' } }}
+    _hover={{ _after: { w: 'full' }, color: 'black' }}
   >
     {title}
   </Flex>
