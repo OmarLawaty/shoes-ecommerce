@@ -99,7 +99,9 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
           transition="0.5s"
           isDisabled={productCount.count === 0 ? true : false}
           cursor={productCount.count === 0 ? 'not-allowed' : 'pointer'}
-          _hover={productCount.count === 0 ? {} : { boxShadow: '0px 0px 20px 5px rgba(214,161,3,.5)' }}
+          _hover={
+            productCount.count === 0 ? {} : { boxShadow: '0px 0px 20px 5px rgba(214,161,3,.5)', bgColor: 'orange.400' }
+          }
           onClick={() => addToCart(product.id, productCount.count)}
         >
           Add to cart

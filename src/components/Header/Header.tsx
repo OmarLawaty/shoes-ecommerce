@@ -16,9 +16,10 @@ export const Header = () => {
       pos="relative"
       justify="space-between"
       flex="1"
-      minH={[10, 16, 20]}
-      borderBottomWidth="1px"
+      minH={['16', '20']}
+      borderBottomWidth={['0', '1px']}
       borderColor="gray"
+      mb={['0', '4', '16']}
     >
       <Flex gap="8">
         <Flex display={['flex', null, 'none']} align="center" fontSize="2em" cursor="pointer" onClick={navMenu.onOpen}>
@@ -27,15 +28,14 @@ export const Header = () => {
 
         <Logo fontSize="1.5em" fontWeight="700" />
 
-        <NavItems gap="3.5" fontWeight="700" />
+        <NavItems display={['none', null, 'flex']} gap="3.5" fontWeight="700" />
       </Flex>
 
-      <Flex gap="10">
+      <Flex gap="5">
         <Cart />
 
         <Image
-          width="45px"
-          height="45px"
+          boxSize={['40px', '45px']}
           borderRadius="50%"
           src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alignSelf="center"
