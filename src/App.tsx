@@ -1,7 +1,7 @@
 import { Container } from '@chakra-ui/react';
 
 import { Header } from './components/Header';
-import { ProductPage } from './pages';
+import { Product } from './pages';
 import { Route, Routes } from 'react-router';
 
 const App = () => {
@@ -10,7 +10,7 @@ const App = () => {
       <Header />
 
       <Routes>
-        <Route path="/:productId" element={<ProductPage />} />
+        <Route path="/:productId" element={<Product />} />
       </Routes>
     </Container>
   );
