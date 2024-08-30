@@ -17,13 +17,13 @@ interface ImagePreviewProps extends FlexProps {
 }
 
 export const ImagePreview = ({
-  initialImageIndex,
+  initialImageIndex = 0,
   setCurrentImageIndex,
   closeLightBox,
   type,
   ...props
 }: ImagePreviewProps) => {
-  const imageIndex = useCounter(initialImageIndex || 0, images.length - 1, true);
+  const imageIndex = useCounter({ initialCount: initialImageIndex, maxCount: images.length - 1, loop: true });
 
   if (setCurrentImageIndex) setCurrentImageIndex(imageIndex.count);
 

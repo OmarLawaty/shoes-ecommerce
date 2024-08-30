@@ -1,15 +1,13 @@
 import { useState } from 'react';
 
-export const useLimitText = (originalText: string, maxChars: number) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+export const useLimitText = (originalText: string, maxChars: number = 300) => {
+  const [isLimited, setIsLimited] = useState(true);
+
+  const limitedText = `${originalText.slice(0, maxChars)} ...`;
 
   return {
-    concatenatedButtonLabel: originalText.length < maxChars ? null : isExpanded ? 'See less' : '...See more',
-
-    text: isExpanded ? originalText : originalText.slice(0, maxChars),
-
-    toggle: () => {
-      setIsExpanded(!isExpanded);
-    },
+    isLimited,
+    text: isLimited ? limitedText : originalText,
+    toggle: () => setIsLimited((prev) => !prev),
   };
 };

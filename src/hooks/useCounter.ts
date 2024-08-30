@@ -1,20 +1,26 @@
 import { useState } from 'react';
 
-export const useCounter = (initialValue: number, maxValue?: number, loop: boolean = false) => {
-  const [count, setCount] = useState(initialValue);
+interface CounterProps {
+  initialCount?: number;
+  maxCount?: number;
+  loop?: boolean;
+}
+
+export const useCounter = ({ initialCount = 1, maxCount, loop = false }: CounterProps) => {
+  const [count, setCount] = useState(initialCount);
 
   return {
     count,
     setCount: (value: number) => setCount(value),
     increment: () => {
-      if (!maxValue || maxValue !== count) return setCount(count + 1);
+      if (!maxCount || maxCount !== count) return setCount(count + 1);
 
       if (loop) setCount(0);
     },
     decrement: () => {
       if (count > 0) return setCount(count - 1);
 
-      if (loop && maxValue) setCount(maxValue);
+      if (loop && maxCount) setCount(maxCount);
     },
   };
 };

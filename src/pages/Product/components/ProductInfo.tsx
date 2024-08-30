@@ -11,8 +11,8 @@ interface ProductInfoProps {
 }
 
 export const ProductInfo = ({ product }: ProductInfoProps) => {
-  const productDescription = useLimitText(product.description, 300);
-  const productCount = useCounter(1, 30);
+  const productDescription = useLimitText(product.description);
+  const productCount = useCounter({ maxCount: 30 });
 
   const addToCart = useCartStore((state) => state.addItem);
 
@@ -44,7 +44,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
             color="orange.500"
             onClick={() => productDescription.toggle()}
           >
-            {productDescription.concatenatedButtonLabel}
+            {productDescription.isLimited ? 'Show More' : 'Show Less'}
           </Box>
         </Text>
       </Flex>
