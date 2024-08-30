@@ -33,7 +33,7 @@ export const useCartStore = create<CartStore>()(
 
           return { cart: newCart, count: getCount(newCart) };
         }),
-      clearCart: () => set({ cart: [] }),
+      clearCart: () => set({ cart: [], count: 0 }),
     }),
     { name: 'cart' }
   )

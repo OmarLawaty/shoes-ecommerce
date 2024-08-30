@@ -7,5 +7,6 @@ export const usePopUp = () => {
     isOpen,
     onOpen: () => setIsOpen(true),
     onClose: () => setIsOpen(false),
+    onToggle: () => setIsOpen((prev) => !prev),
   };
 };
