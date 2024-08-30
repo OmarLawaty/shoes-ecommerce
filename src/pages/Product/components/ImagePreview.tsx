@@ -75,9 +75,10 @@ export const ImagePreview = ({
           <Box
             minW={['unset', null, '350px']}
             minH={['350px', null, '350px']}
-            w={['97vw', null, '30vw']}
-            h={['70vw', null, '30vw']}
-            borderRadius="1em"
+            w={['100vw', '95vw', type === 'lightbox' ? '35vw' : '30vw']}
+            h={['70vw', null, type === 'lightbox' ? '35vw' : '30vw']}
+            borderRadius={['unset', '1em']}
+            transition="all 0.5s"
             bgColor={images[imageIndex.count]}
             cursor={['unset', null, 'pointer']}
             {...props}
